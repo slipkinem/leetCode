@@ -44,7 +44,7 @@ public class Solution {
     public int romanToInt(String s) {
         if (s.trim().length() <= 0) return 0;
         int sum = 0; // 结果
-        int current = 0; // 当前位
+        int current; // 当前位
         int prev = romanValue(s.charAt(0)); // 之前位
         int temp = prev; //
 
