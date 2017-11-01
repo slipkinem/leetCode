@@ -16,26 +16,35 @@ import leetcode.assist.TreeNode;
  * <p>
  * Example 1:
  * Input:
- *  Tree 1                     Tree 2
- *     1                         2
- *    / \                       / \
- *   3   2                     1   3
- *  /                           \   \
+ * Tree 1                     Tree 2
+ * 1                         2
+ * / \                       / \
+ * 3   2                     1   3
+ * /                           \   \
  * 5                             4   7
  * Output:
  * Merged tree:
- *     3
- *    / \
- *   4   5
- *  / \   \
+ * 3
+ * / \
+ * 4   5
+ * / \   \
  * 5   4   7
  * Note: The merging process must start from the root nodes of both trees.
+ * 解析：
+ * 要merge树的全部节点，那么就从根节点开始，通过递归，将两个树的节点累加起来
  */
 public class Solution {
     public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
-        TreeNode r = new TreeNode(0);
-
-        return r;
+        if (t1 == null) {
+            return t2;
+        }
+        if (t2 == null) {
+            return t1;
+        }
+        t1.val += t2.val;
+        t1.left = mergeTrees(t1.left, t2.left);
+        t1.right = mergeTrees(t1.right, t2.right);
+        return t1;
     }
 
     public static void main(String[] args) {
@@ -47,7 +56,8 @@ public class Solution {
         t2.left = new TreeNode(5);
         t2.right = new TreeNode(6);
 
-        Solution solution  = new Solution();
-        System.out.println(solution.mergeTrees(treeNode, t2));
+        Solution solution = new Solution();
+        TreeNode t = solution.mergeTrees(treeNode, t2);
+        System.out.println(t);
     }
 }
